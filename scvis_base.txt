@@ -1,0 +1,309 @@
+###id:1
+###q:
+What is visualization?
+###a: 
+The use of computer-supported, interactive, visual
+representations of data to amplify cognition
+###end
+
+###id:2
+###q:
+Why visualize?
+###a: 
+– lets you see things that would rather go unnoticed (data trends, outliers, dependencies, etc.)
+– gives answers faster
+– lets you interact with your data, study causes and effects, etc.
+– helps to deal with increasing size and diversity of data
+– produces pretty, informative, & interactive pictures
+###end
+
+
+###id:3
+###q:
+Simple model of visualization
+###a: 
+data -> (visualization) -> (perception) <-> knowledge
+		specification <- (interactiv exploration)
+DATA	VISUALIZATION			USER
+
+parentheses transform inputs to outputs
+###end
+
+###id:4
+###q:
+Why do we need computer in ScVis
+###a: 
+– Goes beyond human capacities / patience
+– Scales to large datasets with many variables
+	• Large datasets are infeasible to draw by hand
+– Supports interactivity
+###end
+
+###id:5
+###q:
+Why use interactivity?
+###a: 
+– Handle data complexity
+– A single static view can show only one aspect of data
+###end
+
+###id:6
+###q:
+Why depend on vision?
+###a: 
+– Visual system is high-bandwidth channel to brain
+– Detect interesting visual structures and relationships (e.g.,
+anomalies, patterns, or trends)
+– Sequential vs. parallel processing (popout)
+###end
+
+###id:7
+###q:
+Main traits of vis representation
+###a: 
+Representation should be correct, accurate, and truthful
+###end
+
+###id:8
+###q:
+What is a lie factor
+###a: 
+Lie factor = Size of effect shown in graphic / Size of effect in data
+###end
+
+###id:9
+###q:
+Limits of visualization
+###a: 
+Computational limits
+– Processing time / system memory
+	• Display limits
+– Number of pixels
+– Information density: ratio of used space vs. unused whitespace
+	• Human limits
+– Perception, attention and memory (e.g., change blindness)
+###end
+
+###id:10
+###q:
+What is visualization good for?
+###a: 
+– Visual exploration
+	• find unknown/unexpected
+	• generate new hypotheses
+	Nothing is known about the data
+– Visual analysis (confirmative vis.)
+	• verify or reject hypotheses
+	• information drill-down
+	There are hypotheses
+– Presentation
+	• show/communicate results
+	“Everything” is known
+###end
+
+###id:11
+###q:
+Visualization pipeline
+###a: 
+Simulations + data bases + sensors = data acquisition ->
+raw data -> {filtering, enhancement}
+derived data -> {visualization, mapping}  for example 2D to,	or 3D field to
+renderable representation ->  {rendering}	height field		volume
+display images/video
+###end
+
+###id:12
+###q:
+Passive visualization flowchart. Graph
+###a: 
+Graph
+measurements -> modeling -> simulation
+measurement -> data
+simulation -> data
+data -> visualization
+###end
+
+###id:13
+###q:
+Interactive visualization flowchart. Graph
+###a: 
+Graph
+Passive visualization -> visual analysis of images/animations
+visual analysis of images/animations -> {interaction} -> visualization
+###end
+
+
+###id:14
+###q:
+Visual Steering flowchart
+###a: 
+Graph
+As Interactive visualization +
+visual analysis of images/animations -> {interaction} -> modeling
+visual analysis of images/animations -> {interaction} -> simulation
+###end
+
+###id:15
+###q:
+Characteristics of data values
+###a: 
+– Attribute types (quantitative vs. qualitative)
+– Domain (continuous vs. discrete)
+– Value range (includes precision of values)
+– Data type (categorical, scalar, vector, tensor data)
+– Dimension (number of components)
+– Error and uncertainty
+– (physical) interpretation
+###end
+
+###id:16
+###q:
+Two attributes types
+###a: 
+- Quantitative (numerical, measurable)
+- Qualitative (categorical data, not measurable)
+###end
+
+###id:17
+###q:
+Types of Qualitative attributes
+###a: 
+– Nominal
+	• No natural ordering or indication of values
+Ordinal
+	• Logical order relation (<, >), but no relative size or degree of difference
+###end
+
+###id:18
+###q:
+Continuous data reconstruction
+###a: 
+Derive continuous representation from data given at scattered points (discrete representation)
+###end
+
+###id:18
+###q:
+Radial Basis Functions. Brief Descrition
+###a: 
+– Independent of parameter domain dimension
+(1D/2D/3D)
+– Each (p_i , f_i) influences f(x) based on Euclidean distance ||p_i − x||
+– Nearby points have higher influence than far-away points
+###end
+
+###id:19
+###q:
+Radial Basis Formula
+###a: 
+f(x) = sum{i=1, N} (f_i * g(||p_i − x||))
+g(r) decreases quickly with increasing r, for example g(r) = e^(-r^2)
+###end
+
+###id:20
+###q:
+General Radial Basis Formula disadvantage
+###a: 
+It does not enforce the values at p_i to be f_i. So we need to choose a function g.
+###end
+
+###id:21
+###q:
+What is the function g in Inverse distance weighting
+###a: 
+g(r) = 1/r^2 / sum{N}1/d^2
+Inverse distance divided by sum of inverse distances
+###end
+
+###id:22
+###q:
+Show that using inverse distance weighting we get f(p_i) = f_i
+###a: 
+f(x) = sum{i=1, N} (f_i * g(||p_i − x||))
+g(r) = 1/r^2 / sum{N}1/d^2
+if we plug lim then it is true
+f(p_i) = lim{x -> p_i} sum{i=1, N} (f_i * g(||p_i − x||))
+###end
+
+###id:23
+###q:
+Radial basis function approach with coefficients
+###a: 
+f(x) = sum{i=1, N} (w_i * g(||p_i − x||))
+We get a linear system
+sum{i=1, N} (w_i * g(||p_i − p_j||)) = f_j
+Matrix is N*N (N is number of points)
+###end
+
+###id:24
+###q:
+Drawbacks of radial basis functions
+###a: 
+– Every sample point has influence on whole domain
+– Computationally expensive (solving a system of linear equations)
+– Adding a new sample requires re-solving the system
+###end
+
+###id:25
+###q:
+What is the approach with interpolation once triangulation is given?
+###a: 
+Let the scalar values at vertices be interpolated across the triangles
+– I.e., piecewise linear interpolation of values at interior points
+###end
+
+###id:26
+###q:
+What are the traits of an "optimal" triangulation?
+###a: 
+– Makes triangles as “round” as possible
+– Maximizes the minimum angle in the triangulation radius of in−circle
+– Maximizes radius of in-circle / radius of circumcircle
+###end
+
+###id:27
+###q:
+What is a Delauny triangulation?
+###a: 
+– The circumcircle of any triangle does not contain another point of the set
+	• Maximizes the minimum angle in the triangulation
+	• Such a triangulation is unique (independent of the order of samples) for all but trivial cases
+###end
+
+###id:28
+###q:
+What is the relation of Voronoi diagram to Delaunez triangulation?
+###a: 
+– The geometric dual (topologically equal) of the Delaunay triangulation (or graph)
+– Voronoi samples are vertices in Delauney triangulation
+– Centers of circumcircles of Delauney triangulation
+###end
+
+###id:29
+###q:
+Data interpolation inside a triangle. What do we want to achieve?
+###a: 
+– The triangle lives in a 2 dim plane plane; it has 2 + 1 points (x_i, y_i) with values f_i
+- Can we find a function f that interpolates f_i at the points p_i , i.e., f(p_i) = f_i
+###end
+
+
+###id:30
+###q:
+Data interpolation inside a triangle. How to build it?
+###a: 
+f(x) = a + bx + cy
+1	x_0	   y_o			a			f_0
+1	x_1	   y_1			b			f_1
+1	x_2	   y_2			c			f_2
+###end
+
+###id:29
+###q:
+What is a barycentric interpolation
+###a: 
+– Another way to interpolate inside a triangle, which yields the same linear interpolation as before
+– Every point x in a triangle can be written as a barycentric combination of the vertices p_i :
+x = sum(a_i * p_i) with sum(a_i) = 1 (α_i are barycentric coordinates)
+– If α_i are known, then f(x) can be interpolated from values f_i at the vertices via:
+f(x) = a_0*f_0 + a_1*f_1 + (1 - a_0 - a_1)f_2
+###end

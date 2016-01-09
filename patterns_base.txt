@@ -1,0 +1,387 @@
+###id:1
+###q:
+Pattern Intent:
+- Convert the interface of a class into another interface clients expect. {*****} lets classes work together that couldn't otherwise because of incompatible interfaces.
+- Wrap an existing class with a new interface
+- Impedance match an old component to a new system
+###a: 
+Adapter
+###end
+
+###id:2
+###q:
+Adapter Intent: (3 points)
+###a: 
+- Convert the interface of a class into another interface clients expect. {*****} lets classes work together that couldn't otherwise because of incompatible interfaces.
+- Wrap an existing class with a new interface
+- Impedance match an old component to a new system
+###end
+
+###id:3
+###q:
+Adapter also known as:
+###a: 
+Wrapper
+###end
+
+
+###id:4
+###q:
+Describe two approaches to the adapter:
+###a: 
+- Class Adapter. (Inheritance)
+public class SocketClassAdapterImpl extends Socket implements SocketAdapter {}
+So internally it calls the method of Socket and then converts the result so it adapts and returns it
+public Volt get120Volt() {
+	Volt v = super.getVolt();
+	return ConvertToVolt(v, 120);
+}
+
+- Object Adapter implementation (Composition)
+public class SocketClassAdapterImpl implements SocketAdapter {
+//We only implement an interface.
+	private Socket sock = new Socket();
+	
+	public Volt get40Volt() {
+		Volt v = sock.getVolt();
+		return ConvertToVolt(v, 40);
+	}
+	
+	SocketAdapter can be also an abstract class.
+
+###end
+
+###id:5
+###q:
+Advantages of each type of adapters
+###a: 
+1. A class adapter
+	a) Uses the adaptee directly by calling the inherited methods
+	b) Can override adaptee's behaviour
+	c) No additional pointer indirection
+2. An object adapter
+	a) Let's a single adapteer work with many adaptees
+###end
+
+
+###id:6
+###q:
+Disadvantages of each type of adapters:
+###a: 
+1. A class adapter cannot be used if subclasses of adaptee have to be adapted as well (whereas it works for object)
+2. An object adapter cannot override adaptee's behaviour
+###end
+
+###id:7
+###q:
+When to use adapters
+###a: 
+1. use an existing class that uses an incompatible interface
+2. (object adapter) use several subclasses of adaptee
+3. (class adapter) override some of the adaptee's behaviour
+###end
+
+###id:8
+###q:
+Which pattern is similar to Adapter but does not change its interface?
+###a: 
+Proxy
+###end
+
+###id:9
+###q:
+Which pattern is similar to Adapter and enhances the interface
+###a: 
+Decorator
+###end
+
+###id:10
+###q:
+Which pattern is used before the application is designed, and which after (Adapter, Bridge)
+###a: 
+Adapter - after, Bridge - before
+###end
+
+###id:11
+###q:
+What is a (short) difference between Adapter and a Facade?
+###a: 
+Facade defines a new interface, whereas Adapter reuses an old interface
+###end
+
+###id:12
+###q:
+What is an intent of the proxy
+###a: 
+- Provide a surrogate or placeholder for another object to control access to it.
+- Use an extra level of indirection to support distributed, controlled, or intelligent access
+- Add a wrapper and delegation to protect the real component from undue complexity.
+###end
+
+###id:13
+###q:
+An example of a proxy
+###a: 
+Assume we have a class that can run any command on the system. If we are using it is fine, if it is the client he can delete everything. Here a proxy class can be created to provide a controlled access of the program.
+###end
+
+###id:14
+###q:
+Describe the structure of proxy (CommandExecutor)
+###a:
+Proxy provides the same interface as the subject!
+public interface CommandExecutor {
+	public void runCommand(string cmd) throws Exception
+}
+
+public class CommandExecutorImpl {
+	@Override
+	public void runCommand(string cmd) throws IOException {
+		....
+	}
+}
+
+public class CommandExecutorProxy implements CommanExecutor {
+	private bool isAdmin; // if true then all rights, otherwise limited
+	private CommandExecutor cmd_exec;
+	
+	public CommandExecutorProxy(string login, string pswd) {...}
+	
+	@Override
+	public runCommand(string cmd) throws ... { //conditional execution from cmd_exec }
+}
+###end
+
+
+###id:15
+###q:
+Advantages of proxy
+###a: 
+1. Proxies introduce an indirection that can be useful
+2. Remote proxy hides the location of the real object from the clients that use it
+3. Virtual proxies can create objects on demand. The real object is only created when a client first requests/accesses the object
+4. Protection proxy limits access to the real object
+###end
+
+###id:16
+###q:
+Disadvantages of proxy
+###a: 
+1. There may be a tight coupling between the proxy & the real subject (especially if the object is created on demand)
+###end
+
+###id:17
+###q:
+Applicability of proxy
+###a: 
+1. A remote component has to be used (and "remoteness" is implemented in proxy)
+2. An expensive object has to be created on demand
+3. Access to the original object has to be restricted
+4. Caching frequent requests to avoid network calls
+5. A smart proxy interposes additional actions when an object is accessed. Typical uses include: 
+	Counting the number of references to the real object so that it can be freed automatically when there are no more references (aka smart pointer),
+	Checking that the real object is locked before it is accessed to ensure that no other object can change it.
+###end
+
+###id:18
+###q:
+Difference between proxy and decorator
+###a: 
+Decorator and Proxy have different purposes but similar structures. Both describe how to provide a level of indirection to another object, and the implementations keep a reference to the object to which they forward requests
+###end
+
+###id:19
+###q:
+Intent of the facade
+###a: 
+- Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.
+- Wrap a complicated subsystem with a simpler interface.
+###end
+
+###id:20
+###q:
+Example of the facade
+###a: 
+The Facade defines a unified, higher level interface to a subsystem that makes it easier to use. Consumers encounter a Facade when ordering from a catalog. The consumer calls one number and speaks with a customer service representative. The customer service representative acts as a Facade, providing an interface to the order fulfillment department, the billing department, and the shipping department.
+###end
+
+###id:21
+###q:
+Describe the structure of facade
+###a: 
+public class MySQLHelper {
+	public static Connection GetSQLConnection();
+	public void generateMySQLReportPDF();
+	public void generateMySQLReportHTML();
+}
+
+public class OracleHelper {
+	public static Connection GetOracleConnection();
+	public void generateOracleReportPDF();
+	public void generateOracleReportHTML();
+}
+
+public class HelperFacade {
+	public static void GenerateReport(DBTypes dbtype, ReportTypes rtype, string table_name) {...}
+	
+	public static enum DBTypes { MYSQL, ORACLE }
+	public static enum ReportTypes { HTML, PDF }
+}
+###end
+
+###id:22
+###q:
+Different implementations of Facade
+###a: 
+1. A Facade can be a class or a set of classes
+2. To increase loose coupling  a facade can be an abstract class. Different facades can be created that implement different functionalities of the subsystem classes.
+3. Facades are often implemented as Singletons
+4. A transparent facade can be creted when the clients may want to use the subsystem classes directly and in some cases, use the implementation through the facade.
+5. An opaque Facade does not allow direct access to the subsystem classes
+###end
+
+###id:23
+###q:
+Advantages of Facade
+###a: 
+1. It isolates the client classes from the complex classes. This reduces the number of objects the client interacts with and also reduces compilation dependencies in large systems (?)
+2. A weak coupling exists between the client classes and the sub system classes. Because of this the sub system classes can change without affecting the client classes.
+3. Facade does not prevent the clients from using the sub system classes (opaque prohibits but workaround).
+4. For low-level functions and data structures it provides an object-oriented interface thereby reducing programming errors. (MFC around WinAPI).
+###end
+
+###id:24
+###q:
+Disadvantages of Facade
+###a: 
+1. Overuse leads to a layered system which may affect the performance of the application.
+###end
+
+###id:25
+###q:
+When to use Facade
+###a: 
+1. Provide a simple interface to a complex system2
+2. Make a system easy for newcomers but old timers may want to regain their old powerful access to the sub system.
+3. Provide novice & powerful interfaces for different level of users
+4. Reduce too many dependencies between clients and the classes they use.
+###end
+
+###id:26
+###q:
+Principal difference between a Facade and a Flyweight
+###a: 
+Whereas Flyweight shows how to make lots of little objects, Facade shows how to make a single object represent an entire subsystem.
+###end
+
+###id:27
+###q:
+What is possible for the Facade but not possible for the Adapter?
+###a: 
+Client can use the old interface through the Facade (not opaque), but not through adapter
+###end
+
+###id:28
+###q:
+What can be used as an alternative to Facade to hide platform-specific classes.
+###a: 
+Abstract factory (& Bridge?)
+###end
+
+###id:29
+###q:
+Intent of decorator
+###a: 
+Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
+We want to add new responsibilities not change the interface.
+###end
+
+###id:30
+###q:
+What problem does decorator solve?
+###a: 
+You want to add behavior or state to individual objects at run-time. Inheritance is not feasible because it is static and applies to an entire class.
+###end
+
+###id:31
+###q:
+Description of decorator in terms of classes.
+###a: 
+// Component interface
+public interface Car {
+	public void Assemble;
+}
+// Component implementation
+public class BasicCar {
+	@Override
+	public void Assemble();
+}
+// Decorator
+public class CarDecorator implements Car {
+	protected Car car;
+	
+	public CarDecorator(Car c) {}
+	
+	@Override
+	public void Assemble() {}
+}
+
+// Concrete Decorators
+public class SportCar extends CarDecorator {
+	public SportsCar(car c) {
+		super(c);
+	}
+	
+	public void Asseble() {
+		car.Assemble();
+		// Do smth sporty
+	}
+}
+
+public class LuxuryCar extends CarDecorator
+// Now we can make a sport luxury car
+Car sportsLuxuryCar = new SportsCar(new LuxuryCar(new BasicCar()));
+// Does smth Luxury, then sporty
+###end
+
+###id:32
+###q:
+Implementation of decorator
+###a: 
+1. Each decorator must have the same interface as the object that it decorates. Consequently it must inherit from the same base class.
+2. Abstract decorator is required only if more decorators have to be added in future. If only one decorator is required no need of the Abstract Decorator.
+3. Abstract Decorator and its base class should be lightweight otherwise the decorators will be too heavy to use.
+###end
+
+###id:33
+###q:
+Advantages of decorator
+###a: 
+1. Using a decorator is a flexible way of overriding functionality without using inheritance.
+	- since it relies on composition it's dynamic
+2. Features are added incrementally as the code progresses
+	- no need to put every feature in one class
+3. You pay the price of using features only when u are using them
+4. It is easy to combine different classes together to get a new functionality
+	- even the same capability can be added twice
+###end
+
+###id:34
+###q:
+Disadvantages of decorator
+###a: 
+1. Lot of small objects are created
+2. Clients need to know how objects interact with each other
+3. System becomes harder to understand and debug
+###end
+
+###id:35
+###q:
+Applicability of decorator
+###a: 
+We want to:
+1. add responsibilities dynamically
+2. Add responsiblities that have to be withdrawn later
+3. have Subclass, but it is impractical, e.g. supporting combinations through inheritance is error-prone.
+4. have subclass but the class is not available for such features (sealed in C# or final in Java) and we want new features to the class).
+###end
