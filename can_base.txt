@@ -1,0 +1,196 @@
+###id:1
+###q:
+Computer System as Multi-Level Machine. Hierarchy
+###a: 
+Problem-oriented language level -> {translation compiler}
+Assembly language level -> {Translation (assembler)}
+Operating system machine level -> {Partial interpretation (operating system)}
+Instruction set architecture level -> {Interpretation (microprogram) or direct execution}
+Microarchitecture level -> {Hardware}
+Digital logic level
+###end
+
+###id:2
+###q:
+Computer Generations
+###a:
+• Zeroth Generation -1945: Mechanical Computers (Babbage, Leibniz) + Konrad Zuse Machine (mechanical engine, binary system, floating point arithmetic)
+• First Generation - 1955: Vacuum Tubes
+• Second Generation - 1965: Transistors
+• Third Generation – 1980: Integrated Circuits
+• Fourth Generation - ...: Very Large Scale Integration
+• Fifth Generation: The invisible computer
+###end
+
+###id:3
+###q:
+Zeroth generation Computers
+###a:
+Mechanical Computers (Babbage, Leibniz) + Konrad Zuse Machine (mechanical engine, binary system, floating point arithmetic)
+###end
+
+###id:4
+###q:
+First generation Computers
+###a:
+British intelligence (1944)
+	Built COLOSSUS the world first electronic digital computer
+	Alan Turing helped in the design
+	Designed to decode German messages.
+Jon Mauchley and John Presper Eckert (1946)
+	ENIAC with 18.000 tubes, 1.500 relays. Weight: 30 tons,
+	power consumption: 140 Kilowatts.
+	Decimal arithmetic, each digit represented by 10 tubes
+	Grant by the army.
+Maurice Wilkes (1946)
+	EDSAC, binary arithmetic
+	First stored program computer
+###end
+
+###id:5
+###q:
+The von Neumann architecture
+###a:
+- General purpose machine
+	Independent of applications
+	Flexible & Programmable
+- 4 main units
+	Control unit (Instruction counter)
+	Arithmetic unit (Accumulator)
+	Input/Output unit (Connection to the outside)
+	Main memory
+- Interconnected by simple buses
+###end
+
+###id:6
+###q:
+Program and data separated or not in von Neumann architecture?
+###a:
+In the same memory
+###end
+
+###id:7
+###q:
+Structure of memory in von Neumann architecture
+###a:
+- Equal size
+- Consecutively numbered (addresses)
+###end
+
+###id:8
+###q:
+How is the program structured in von Neumann architecture?
+###a:
+Program is composed of a sequence of instructions
+	Read one after the other from main memory
+Program execution can be altered
+	Conditional or unconditional jumps
+	Change the current execution
+	Carried out by loading new value into PC register
+###end
+
+###id:9
+###q:
+Principal changes of modern architecture from von Neumann architecture?
+###a:
+Control und Arithmetic unit combined into CPU (Central Processing Unit)
+New memory paths between memory and I/O: Direct Memory Access (DMA)
+Multiple arithmetic units / Multiple CPUs
+Parallel processing
+###end
+
+###id:10
+###q:
+Examples of 4,8, 16 bit computers
+###a:
+4 - Intel 4004
+8 - Intel 8008
+16 - Texas Instruments TMS 9900, Intel 8086
+###end
+
+###id:11
+###q:
+First 16/32 bit processors. What does it mean?
+###a:
+- Motorola MC68010
+- National Semiconductor NS16032
+internal/external 16-bit Bus, internal 32 Bit Structure (of registers)
+Additional Functionality on the Chip
+	Direct Memory Access (DMA) (Intel 80186)
+	Virtual memory management (MC68010, Intel 80286)
+	Optional Coprocessor (Intel 8086/80286, NS16032)
+	Extended Address Space
+###end
+
+###id:12
+###q:
+What is a computer bus? Internal bus, external bus?
+###a:
+A bus is a communication system that transfers data between components inside a computer, or between computers. This expression covers all related hardware components (wire, optical fiber, etc.) 
+Internal bus[edit]
+The internal bus, also known as internal data bus, memory bus, system bus or Front-Side-Bus, connects all the internal components of a computer, such as CPU and memory, to the motherboard
+External bus[edit]
+the expansion bus (sometimes called the input/output bus) allows various motherboard components (USB, serial, and parallel ports, cards inserted in PCI connectors, hard drives, CD-ROM and CD-RW drives, etc.) to communicate with one another. However, it is mainly used to add new devices using what are called expansion slots connected to the input/outpur bus.
+###end
+
+###id:13
+###q:
+What is the width of a bus?
+###a:
+The term "width" is used to refer to the number of bits that a bus can transmit at once. 
+###end
+
+###id:14
+###q:
+How to calculate the transfer speed of a bus?
+###a:
+width * frequencey, e.g.:
+16 * 133*10^6 = 2128*10^6 bit/s (16 bit bus, 133 Mhz)
+###end
+
+###id:15
+###q:
+Architecture of a bus
+###a:
+Each bus is generally constituted of 50 to 100 distinct physical lines, divided into three subassemblies:
+The address bus (sometimes called the memory bus) transports memory addresses which the processor wants to access in order to read or write data. It is a unidirectional bus.
+The data bus transfers instructions coming from or going to the processor. It is a bidirectional bus.
+The control bus (or command bus) transports orders and synchonisation signals coming from the control unit and travelling to all other hardware components. It is a bidirectional bus, as it also transmits response signals from the hardware.
+###end
+
+###id:16
+###q:
+First 32 bit CISC processors (major)
+###a:
+Motorola MC680x0
+Intel i386 / i486 / Pentium
+###end
+
+###id:17
+###q:
+First 32 bit RISC processors (major)
+###a:
+Sun Microsystems SPARC
+MIPS technologies MIPS R2000 / MIPS R3000
+###end
+
+###id:18
+###q:
+First 64/32-bit Processors
+###a:
+SUN Microsystems SuperSPARC
+Motorola 88110
+IBM, Motorola PowerPC 601 (MPC601)
+###end
+
+###id:19
+###q:
+Primary difference of 64 bit computer architecture
+###a:
+64-bit Structure
+Internal Parallelism
+Instruction pipelining
+Arithmetic Pipelining
+Instruction and Data Caches
+Advanced Memory and Peripheral Connections
+###end

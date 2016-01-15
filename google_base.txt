@@ -1,0 +1,75 @@
+###id:1
+###q:
+When developing a dynamic-programming algorithm, we follow a sequence of what steps?
+###a: 
+1. Characterize the structure of an optimal solution.
+2. Recursively define the value of an optimal solution.
+3. Compute the value of an optimal solution, typically in a bottom-up fashion.
+4. Construct an optimal solution from computed information.
+###end
+
+
+###id:2
+###q:
+What does it mean to exhibit optimal substructure?
+###a: 
+Optimal solutions to a problem incorporate optimal solutions to related subproblems, which we may solve independently.
+###end
+
+###id:3
+###q:
+What is the primary reason for dynamic programming to be able to drastically reduce computation time?
+###a: 
+Time-memory trade-off, and solving one problem only once.
+###end
+
+###id:4
+###q:
+Which are the equivalent ways to implement dynamic-programming approach?
+###a: 
+1. top-down with memoization
+In this approach, we write the procedure recursively in a natural manner, but modified to save the result of each subproblem (usually in an array or hash table)
+2. bottom-up method. 
+This approach typically depends on some natural notion of the “size” of a subproblem, such that solving any particular subproblem depends only on solving “smaller” subproblems.
+###end
+
+###id:5
+###q:
+Compare the approaches of dynamic programming
+###a: 
+These two approaches yield algorithms with the same asymptotic running time, except in unusual circumstances where the top-down approach does not actually recurse to examine all possible subproblems. The bottom-up approach often hasmuch better constant factors, since it has less overhead for procedure calls.
+###end
+
+###id:6
+###q:
+What is a subproblem graph in dynamic programming?
+###a: 
+It is a directed graph, containing one vertex for each distinct subproblem. The subproblem graph has a directed edge from the vertex for subproblem x to the vertex for subproblem y if determining an optimal solution for subproblem x involves directly considering an optimal solution for subproblem y.
+###end
+
+###id:7
+###q:
+How can the subproblem graph help us determine the running time of the dynamic programming algorithm?
+###a: 
+Typically, the time to compute the solution to a subproblem is proportional to the degree (number of outgoing edges) of the corresponding vertex in the subproblem graph, and the number of subproblems is equal to the number of vertices in the sub- problem graph. In this common case, the running time of dynamic programming is linear in the number of vertices and edges.
+###end
+
+###id:8
+###q:
+Sequence of steps how to solve a dynamic programming question
+###a: 
+1. Come up with some kind of an algorithm sketch involving independent overlapping subproblems.
+2. Come up with a natural indexing of the subproblems. The most common is either the profit of cost matrix:
+	a) Cutting the rod the subproblem is cutting of the rod of the length k < l (initial length). So we have l subproblems: cutting rods of length 1, 2, 3, ... l. It should be noted that there is in some sense no order in when we divide a problem into subproblems. When we divide P(K) = max(...., P(2) + P(K - 2) ...). We don't care which part of the rod is responsible for P(2) and which for P(K - 2). The rod is homomorphic. So we have 1d indexing of the problems. Subproblems are referring problems of different sizes. One has to notice that sometimes one does not have to consider all the combinations that result in K. P(2) + P (K - 2) is analogous to P(K - 2) + P(2). So the number of combinations is floor(K/2) + 1 (floor to distinguish even and odd, or just K << 1 + 1).
+	b) Ideal sequence of matrix multiplicaation. Let's see the sequence of the matrix as a row. If all the matrices would have been the same then the problem would have in some way similar to rod cutting. But efficient multiplying of matrices from i to j may be different from f to g. So if a subproblem is referring the intervals rather than sizes, then the natural indexing is 2 dimensional. In most of the case if we are referring to an interval the valid intervals are those with positive length, P(i, j) i<j. This is the case with matrix multiplication. That means that we don't need the whole matrix formed by 2dimensional indexing (we need upper triangular matrix without the main diagonal). The main diagonal are zeros because we don't need any calculations to calculate a matrix).
+	c) Ideal sequence of currency exchanges. Given n currencies and exchange rates in each pair. we have n*n matrix. where diagonal is 1 (no sense converting a currency into itself). r_ij is exchange rate i -> j, r_ii vice versa. don't have to be equal. In this case the optimal subproblem is the sequence of exchanges from i to j. It is in some sense not an interval but a pair. So it doesn't have to be positive like with matrices. That's why the whole matrix is interesting for us.
+	d) Longest common subsequence. Given two strings str1 and str2 The subproblem is finding the LCS in str1[:i] and str2[:j] where i and j could be equal or not. But the length of the two strings can be different m and n, so the final matrix is of size mn, so there is no any special meaning for the diagonal.
+
+3. Step 3 is mostly done in step 1 and 2. We should determine the recursive structure of the solution. If we have 2 dimensional natural indexing then we will have something like A(u, v) = extr(A(u, u + 1) + A(u + 2, v) + smth, A(u, u + 2) + A(u + 3, v) + smth, ...). In general the first indices in parentheses will be more than u and the second less than v. That means we have some dependance. If |u - v| = k then we we need to have all the pairs with the difference less or equal than k calculated. On the first iteration we need all the values on the main diagonal. On the second the +1/-1 diagonals and so on. So we are moving from the main diagonal to lesser diagonals. In the matrix n*n we have n diagonals and either n(n-1)/2 or (n-1)(n-2)/2 elements to compute.
+In 1d case everything is easier. We have an array and we start filling from the left to right.
+extr is max if we are optimizing price, and min if we are minimizing costs. Inside the extr we have the list of values. Let's consider the structure of each value. If we are talking about the costs then it should be the summation (or multiplication) of the costs of the two subproblems + some additional member (which actually determines the problem) - in matrix multiplication it is the the number of the multiplications between two matrices in LCS problem it is 1 if LCS grew by 1 char and zero if not (interesting and problem specific part of the calculation).
+	3b) We have to have a function for calculating P(i, j). The signature is something like
+	CalcP(i, j, P_mtx, Choice_mtx); the function fills the P(i,j) into P_mtx and somehow fills the Choice_mtx.
+
+4. What additional infor
+###end
