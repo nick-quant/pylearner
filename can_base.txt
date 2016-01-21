@@ -194,3 +194,450 @@ Arithmetic Pipelining
 Instruction and Data Caches
 Advanced Memory and Peripheral Connections
 ###end
+
+###id:20
+###q:
+What is RISC architecture? Examples
+###a:
+Sun Microsystems SPARC
+Motorolla PowerPC
+Reduced Instruction Set Computer
+System that uses a small, highly optimized set of instructions, rather than a more versatile set of instructions often found in other types of architectures. Another common trait is that RISC systems use the load/store architecture, where memory is normally accessed only through specific instructions, rather than accessed as part of other instructions like add.
+A common misunderstanding of the phrase "reduced instruction set computer" is the mistaken idea that instructions are simply eliminated, resulting in a smaller set of instructions.
+The term "reduced" in that phrase was intended to describe the fact that the amount of work any single instruction accomplishes is reduced—at most a single data memory cycle—compared to the "complex instructions" of CISC CPUs that may require dozens of data memory cycles in order to execute a single instruction
+- Small number of fast instructions
+- Fixed instruction format, fixed length
+- Large number of general purpose registers
+- Typical for load/store architectures
+###end
+
+###id:21
+###q:
+What is CISC architecture? Examples
+###a:
+Motorola MC680x0
+Intel i386 / i486 / Pentium
+Complex instruction set computing is a processor design where single instructions can execute several low-level operations (such as a load from memory, an arithmetic operation, and a memory store) or are capable of multi-step operations or addressing modes within single instructions.
+- Large number of instructions in ISA
+- Large number of addressing schemes
+- Varying size of instructions
+###end
+
+###id:22
+###q:
+Number of transistors (Intel until Pentium 4)
+###a:
+4004 - 2.300
+8008 - 3.500
+8080 - 45.00
+8086 - 29.000
+80286 - 134.000
+80386 - 275.000
+80486 - 1.180.235
+Pentium - 3.100.000
+Pentium 2 - 7.500.000
+Pentium 3 - 21.000.000
+Pentium 4 - 100.000.000
+###end
+
+###id:23
+###q:
+What is an integrated circuit?
+###a:
+An integrated circuit or monolithic integrated circuit (also referred to as an IC, a chip, or a microchip) is a set of electronic circuits on one small plate ("chip") of semiconductor material, normally silicon.
+ICs can be made very compact, having up to several billion transistors and other electronic components in an area the size of a fingernail.
+###end
+
+###id:24
+###q:
+What is a throughput
+###a:
+Number of completed taks within a given time interval.
+###end
+
+###id:25
+###q:
+Execution Time
+###a:
+Wall-clock time, response time, elapsed time
+	Latency for completing a task
+	Also comprises memory access, disk access, and I/O.
+CPU Time
+	User CPU Time: CPU executes a program
+	System CPU Time: CPU executed operating system tasks required by a program.
+###end
+
+###id:26
+###q:
+Performance Evaluation
+###a:
+Clock rate, MIPS, MFLOPS
+###end
+
+###id:27
+###q:
+CPI
+###a:
+Average number of clock cycles per Instruction
+number of clock cycles / IC
+###end
+
+###id:28
+###q:
+IC (Instruction Count)
+###a:
+Number of executed instructions
+###end
+
+###id:29
+###q:
+How does one calculate CPU-time
+###a:
+CPU-time = IC*CPI/clock frequency
+###end
+
+###id:30
+###q:
+What is MIPS?
+###a:
+Million Instructions Per Second
+MIPS=#executed instructions/(execution time*10^6 )
+###end
+
+###id:31
+###q:
+What is MFLOPS?
+###a:
+Million Floating Point Operations Per Second
+MFLOPS= #floating point operations/(execution time *10 6 )
+###end
+
+###id:32
+###q:
+What is ISA?
+###a:
+An instruction set, or instruction set architecture (ISA), is the part of the computer architecture related to programming, including the native data types, instructions, registers, addressing modes, memory architecture, interrupt and exception handling, and external I/O. An ISA includes a specification of the set of opcodes (machine language), and the native commands implemented by a particular processor
+###end
+
+###id:33
+###q:
+Examples of benchmarks
+###a:
+Lawrence Livermore Loops:
+	– For evaluating vectorizing compilers.
+LINPACK software package: Solving a linear equation system
+	– Used in TOP500 list (http://www.top500.org)
+BLAS (Basic Linear Algebra Subprograms)
+###end
+
+###id:34
+###q:
+What is Endiannes?
+###a:
+How to store data > 1 byte in memory
+- Addressing is based on individual bytes
+###end
+
+###id:35
+###q:
+What is Endiannes?
+###a:
+How to store data > 1 byte in memory
+- Addressing is based on individual bytes
+###end
+
+###id:36
+###q:
+What is SPARC?
+###a:
+SPARC (from "scalable processor architecture") is a RISC instruction set architecture (ISA) developed by Sun Microsystems and introduced in mid-1987.
+###end
+
+###id:37
+###q:
+Big Endian. What is it? Example
+###a:
+SPARC arch.
+7-0	15-8 23-16 31-24
+###end
+
+###id:38
+###q:
+Little Endian. What is it? Example
+###a:
+SPARC arch.
+31-24 23-16 15-8 7-0
+IA-32 arch. ("Intel Architecture, 32-bit", sometimes also called i386)
+###end
+
+###id:39
+###q:
+Where are the stacks used?
+###a:
+0. Expression evaluation stack
+1. return address stack
+2. local variable stack
+3. parameter stack
+###end
+
+###id:40
+###q:
+Where are the stacks used?
+###a:
+0. Expression evaluation stack
+1. return address stack
+2. local variable stack
+3. parameter stack
+###end
+
+###id:41
+###q:
+Stack execution model
+###a:
+All operands are on stack
+Result stored again on stack
+Problem: Memory is slow
+Example: JVM
+###end
+
+###id:42
+###q:
+Accumulator execution model
+###a:
+Special register for arithmetic results
+Arbitrary locations for (single) source operands
+Problem: Limited flexibility
+Example: C=A+B:
+• Load A, Add B, Store C
+###end
+
+###id:43
+###q:
+Register-register execution model
+###a:
+Also called Load/Store Architecture
+3 Operands possible, only from Registers
+Special operations to load & store from memory
+
+Example:
+C=A+B:
+Load R1,A / Load R2, B /
+Add R3,R1,R2 / Store C,R3
+###end
+
+###id:44
+###q:
+Pros and cons of register-register model. Examples of it
+###a:
+Features:
++ Simple, regular instruction format
+- But: higher instruction count
+Examples:
+SPARC, MIPS, Alpha, PPC
+###end
+
+###id:45
+###q:
+Memory-Memory Execution model
+###a:
+All operands are in memory and can be specified
+3 Operands per instructions
+Example:
+	C=A+B:
+	Add C,A,B
+###end
+
+###id:46
+###q:
+Pros and cons of memory-memory model. Examples of it
+###a:
+Features:
+Most compact, no registers wasted
+Irregular instruction format/execution, memory slow
+Examples:
+VAX
+###end
+
+###id:47
+###q:
+Memory-Register Execution model
+###a:
+One operand in main memory, one in registers
+Two operands, first one overwritten
+Example:
+	C=A+B:
+	Load R1,A / Add R1, B / Store C,R1
+###end
+
+###id:48
+###q:
+Pros and cons of memory-register model. Examples of it
+###a:
+Features:
+Specification not too complicated, good density
+One operand destroyed
+Examples:
+Intel IA-32, Motorola 68K family
+###end
+
+###id:49
+###q:
+Examples of adressing schemes
+###a:
+Direct operand,
+Register adressing,
+Direct adressing,
+Register indirect adressing
+Register indirect adressing with displacement
+###end
+
+###id:50
+###q:
+Main and additional classes of ISA
+###a:
+Main:
+	Arithmetical and Logical functions
+	Data Transfer instructions
+	Control flow instructions
+Additional:
+	System instructions for management tasks
+	I/O operations (in some architectures)
+###end
+
+###id:51
+###q:
+What are flags?
+###a:
+Main:
+Additional result values
+	Arithmetic operations: E.g. Overflow
+###end
+
+###id:52
+###q:
+3 most common 80x86 instructions
+###a:
+Load
+Conditional branch
+Compare
+###end
+
+###id:53
+###q:
+Two modes of program execution
+###a:
+A processor in a computer has two different modes: user mode and kernel mode. The processor switches between the two modes depending on what type of code is running on the processor. Applications run in user mode, and core operating system components run in kernel mode. While many drivers run in kernel mode, some drivers may run in user mode.
+User mode
+	Standard execution
+	Unprivileged instructions
+Kernel mode
+	All instructions allowed
+###end
+
+
+###id:54
+###q:
+Simple instruction cycle
+###a:
+Fetch instruction (Read instruction from main memory or L1 cache) ->
+Decode instruction (Decode to query the requested action) ->
+Fetch Data (Get the data required for the requested action) ->
+Process Data (Perform the requested data processing) ->
+Write Data (Store the result of the processed data)
+###end
+
+###id:55
+###q:
+What is an interrupt?
+###a:
+External, asynchronous interruption of the processor
+Processor stops execution on current instructions
+Starts with interrupt routine
+Asynchronous change in control flow
+###end
+
+###id:56
+###q:
+Pipelining in ideal case for standard units
+###a:
+FI DI FD PD WD FI DI FD PD WD FI DI FD PD WD 
+   FI DI FD PD WD FI DI FD PD WD FI DI FD PD WD 
+      FI DI FD PD WD FI DI FD PD WD FI DI FD PD WD 
+         FI DI FD PD WD FI DI FD PD WD FI DI FD PD WD 
+         	FI DI FD PD WD FI DI FD PD WD FI DI FD PD WD 
+Maximally 5 times faster (5 = number of units)
+###end
+
+###id:57
+###q:
+Problems with instruction pipelining
+###a:
+- Not all phases are of equal length
+- Some instructions need additional phases
+###end
+
+###id:58
+###q:
+Which conflicts occur in pipelining
+###a:
+Data Conflicts
+	One instruction needs data from a previous one
+Resource Conflicts
+	Two instructions need the same resources at the same time
+Control Conflicts
+	Wrong instructions executed in the pipeline
+###end
+
+###id:59
+###q:
+Solutions to pipeline conflicts
+###a:
+Software Solutions
+	Detection of Data Conflicts by the Compiler
+	Appropriate code structuring to avoid conflicts
+Hardware Solutions
+	Hardware detects dependencies dynamically
+	Treatment of conflicts
+###end
+
+###id:60
+###q:
+Describe hardware solutions to pipeliene conflicts
+###a:
+Empty pipeline in case of dependency
+	Stop starting new instructions
+	Start when dependency is fulfilled
+	„Pipeline Stall“
+Forwarding of results
+	Forward a result directly between pipeline stages
+	No detour through register file
+	Forwarding possible before WD phase
+###end
+
+###id:61
+###q:
+What has to be done after branching in pipeline
+###a:
+After branch has been executed
+	Pipeline must be restarted
+	Intermediate instructions must be aborted
+	Their results must be dropped
+###end
+
+###id:62
+###q:
+Hardware solutions to branching in pipelining
+###a:
+Restart pipeline
+Add mechanisms to evaluate branch target early
+Branch prediction
+###end
+
+###id:63
+###q:
+Examples of pipeline lengths
+###a:
+- Intel - Pentium-II: 12/14, Pentium-IV: 22/24, 33
+- Sun Ultra II: 6/9, Ultra III, 14/15
+- Sandy Bridge / Bulldozer: about 15.
+###end
