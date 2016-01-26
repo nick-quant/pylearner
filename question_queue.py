@@ -7,7 +7,8 @@ class QuestionQueue:
 	def __init__(self, q_lst, stat, scores, alpha, beta, chunk_size, min_height, min_delay, learn_tolerance = 0):
 		# min height of the triangle
 		self.scores = scores
-		self.alpha = alpha
+		#self.alpha = alpha
+		self.alpha = pow(min_height, 1 - beta)
 		self.beta = beta
 		self.chunk_size = chunk_size
 		self.min_height = min_height
@@ -45,21 +46,24 @@ class QuestionQueue:
 		else:
 			return False
 	
-	def _MaximizeTriangle():
+	def _MaximizeTriangle(self):
+		print('N:{}\t, m:{}'.format(self.N, self._m))
 		self._FillTriangleList()
 		while self._TriangleFilled():
 			print('Triangle filled')
 			self.N += self.chunk_size
 			self._m = pow(self.N / self.alpha, 1 / self.beta)
+			print('N:{}\t, m:{}'.format(self.N, self._m))
 			# We changed the two coefficients of the triangle equation. We are ready to recalculate the triangle
 			self._FillTriangleList()
 		
 	def Next(self):
 		# Now we are ready to check whether the triangle is filled. If yes we would like to change the triangle
-		self._MaximiizeTriangle()
+		self._MaximizeTriangle()
 		# upside is the list of the the differences of what we have and what should have 
 		upside = list([self._CalcTotalScore(self.q_lst[i].qid) - self._triangle_lst[i] for i in range( min(self.N, len(self.q_lst)) )])
 		print('upside: {}'.format(upside))
+		print('upside sum: {}'.format(sum(upside)))
 		upside_sorted_id = list([i[0] for i in sorted(enumerate(upside), key=lambda x:x[1])])
 		print('upside_sorted_id: {}'.format(upside_sorted_id))
 		# So now we have the questions with higher priority first, but we have to chek whether they have been called lately,

@@ -33,8 +33,7 @@ min_height = correct_answers * max(scores)
 #question_file = 'qbase.txt'
 #stat_file = 'qstat.txt'
 #question_file = 'patterns_base.txt'
-#question_file = 'can_base.txt'
-question_file = 'scvis_base.txt'
+question_file = 'can_base.txt'
 stat_file =  'stat_' + question_file
 
 questions, question_lst = ParseQuestions(question_file)
