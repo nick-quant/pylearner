@@ -74,6 +74,7 @@ command = 'd Eetjw*n4GJ20 P 5ERFD, pf'
 call(['clear'])
 test_q = qq.Next()
 print(test_q.question)
+last_command = 'n'
 while command != '@exit' and command != '@e':
 	if command == '@save':
 		print('Saving statistics')
@@ -84,12 +85,15 @@ while command != '@exit' and command != '@e':
 		call(['clear'])
 		test_q = qq.Next()
 		print(test_q.question)
-	elif command == '@show' or command == '@s':
+		last_command = 'n'
+	elif (command == '@show' or command == '@s') and not (last_command == 's'):
 		print(test_q.answer)
+		print('Scores corresponding evaluations in the range [{}, {}]: {}'.format(0, len(scores) - 1, scores))
 		res = EvalAnswer(len(scores))
 		if not test_q.qid in stat:
 			stat[test_q.qid] = []
 		stat[test_q.qid].append((datetime.now(), int(res)))
 		SaveStatistics(stat_file, stat)
+		last_command = 's'
 	command = raw_input(': ')
 SaveStatistics(stat_file, stat)

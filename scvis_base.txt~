@@ -435,3 +435,185 @@ High quality reconstruction formula where we have values at integers.
 ###a: 
 g = sum(-2m, 2m)(f_i * h(x-floor[x] - i))
 ###end
+
+###id:43
+###q:
+At what stage of a visualization pipeline are the mapping techniques used?
+###a: 
+derived data -> renderable representation
+###end
+
+###id:44
+###q:
+What does the mapping of data consist of?
+###a: 
+Graph primitives (can be displayed):
+	points
+	lines
+	surfaces
+	volumes
+Visual channels (control appearance of graph. primitives and are used to encode data values):
+	Position
+	Color
+	Slope/tilt
+	Shape
+	Size
+###end
+
+###id:45
+###q:
+Ranking of mapping techniques (from empirical studies)
+###a: 
+Most accurate/effective (properties of visual channels)
+1. Position
+2. Length
+3. Slope/tilt angle
+4. 2D Area
+5. Saturation and luminance
+6. 3d Volume, curvature
+###end
+
+###id:46
+###q:
+Steven’s psychophysical power law
+###a: 
+S = I^g
+S - physical sensation
+I - physical intensity
+g > 1 overestimating
+g < 1 underestimating
+###end
+
+###id:47
+###q:
+Steven’s psychophysical power law examples for g > 1 and g < 1
+###a: 
+g > 1
+	electric shock
+	saturation
+g = 1
+	length
+g < 1
+	area
+	depth
+	brightness
+###end
+
+###id:48
+###q:
+Reasons why visualization mapping may not work
+###a: 
+– Accuracy
+– Pop-out (emphasize important information)
+– Discriminability (how many usable steps?)
+– Separability (judge each channel independently)
+– Relative vs. absolute judgement
+###end
+
+###id:49
+###q:
+Describe the pop-out effect
+###a: 
+– Parallel processing on many individual channels
+– Speed independent of distractor count
+Good pop-out when we change only one property of visual channel (shape or color or else), not two at the same time.
+###end
+
+###id:50
+###q:
+Separable vs integral visual channels (example)
+###a: 
+Separable vis channels
+Fully separable (We are able to judge each visual channel independently)
+1. color + position
+2. color + shape
+3. size + orientation
+4. width + height
+5. color 1 + color 2
+Integral vis channels (Major inference) Channels are viewed holistically
+###end
+
+###id:51
+###q:
+Describe the pop-out effect
+###a: 
+– Parallel processing on many individual channels
+– Speed independent of distractor count
+Good pop-out when we change only one property of visual channel (shape or color or else), not two at the same time.
+###end
+
+###id:52
+###q:
+Relative vs. absolute judgments
+###a: 
+Relative vs. absolute judgments
+– Perception highly context-dependent
+– Perceptual system mostly operates with relative judgments, not absolute ones
+###end
+
+###id:53
+###q:
+Weber’s Law
+###a: 
+just-noticeable difference is a fixed percentage of the magnitude of the stimuli
+###end
+
+###id:54
+###q:
+For which kind of data is bar chart good?
+###a: 
+– 1 categorical independent variable (domain)
+– 1 quantitative dependent variable mapped to length
+###end
+
+###id:55
+###q:
+Difference in usage of pie chart and bar chart
+###a: 
+- Pie chart splits 100% into parts
+- angle visual channel is less accurate than length (in bars)
+###end
+
+###id:56
+###q:
+Which questions to answer to decide whether to use pie chart?
+###a: 
+– Often bar chart is a better choice!
+– Do the parts make up a meaningful whole?
+– Are the parts mutually exclusive?
+– Do you want to compare the parts to each other or the parts to the whole?
+– How many parts do you have?
+###end
+
+###id:57
+###q:
+What is a stacked bar chart?
+###a: 
+– Quantitative data wrt 2 categorical vars (horizontal & vertical)
+– Investigate part-to-whole relationship (100%)
+– Length and color hue
+###end
+
+###id:58
+###q:
+What is a parallel sets chart?
+###a: 
+(from slides)
+– Quantitative data wrt multiple categorical variables
+– Shows connections and proportions
+(my explanatiion)
+We have two groups of categorical variables. Each group sums up to 100%
+Each element of the first group can be decomposed into the second group.
+For example:
+1st group: {mathematicians, physicists, chemists}
+2nd group: {male, female}
+###end
+
+###id:59
+###q:
+Parallel sets for 3 groups of categorical variables
+###a: 
+we use two parallel sets
+{1} -> {2}
+{2} -> {3}
+###end
