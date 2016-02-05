@@ -621,3 +621,480 @@ For example (refugees):
 {2} = {Accepted, rejected}
 {3} = {Germany, Sweden, France}
 ###end
+
+###id:60
+###q:
+Assumed that we have n different items that can be described with a pie/bar chart. How can we compare all of them?
+What do we see using different approaches
+###a: 
+1. n pie charts (or bar charts) - compare values in different categories
+2. stacked bar chart - compare overall values across items, but also show contribution per category
+3. grouped bar charts - compare values across categories within each item
+4. Layered bar charts: compare values within categories
+###end
+
+###id:61
+###q:
+What is a line graph?
+###a: 
+– Quantitative data on common scale(s) wrt. time
+– Connection between points – trends, structures, groups
+###end
+
+###id:62
+###q:
+How to make a line graph perceptually more accurate?
+###a: 
+– Banking to 45 degrees
+• Perceptual principle:
+	most accurate angle judgment around 45°
+• Pick aspect ratio
+	(height/width) accordingly
+###end
+
+###id:63
+###q:
+What is a theme-river?
+###a: 
+(slides)
+– Thematic changes in documents
+– Occurrence per topic/category mapped to width of river band
+– Less distorted around center
+– Rearranging bands
+(my explanation)
+k topics. Each topic has an occurence frequency at each moment of time. Like in Civilization after End Game (but not normalized width)!
+###end
+
+###id:64
+###q:
+What is a horizon-graph?
+###a: 
+(slides)
+– Reduces vertical space without losing precision
+– Split into layered bands
+– Optional mirroring
+– Collapse color bands to show values in less vertical space (my explanation)
+###end
+
+###id:65
+###q:
+What is a histogram?
+###a: 
+– Special kind of bar chart
+– Show frequency of occurrence of values for 1 variable
+– Bin width effects representation
+###end
+
+###id:66
+###q:
+Box plot variation on the example of Tukey's box plot
+###a: 
+As a japanese candle. But the body is divided into two. So we can represent 5 things. min, med - q%, med, med + q%, max
+###end
+
+###id:67
+###q:
+Describe scatterplots:
+###a: 
+– Show correlations between 2 dependent variables
+– (Qualitative no metric scale ???) & quantitative (measurable) data
+– Find trends, outliers, distributions, correlations, clusters,
++ Can encode additional attributes by size, color, shape
+###end
+
+###id:68
+###q:
+Describe scatterplot matrix:
+###a: 
+– Show (all possible) combinations of dimensions/attributes in a scatterplot matrix
+– Each row/column is one dimension
+– Overview of correlation and patterns between data attributes
+###end
+
+###id:69
+###q:
+Parallel coordinates diagram technique
+###a: 
+– Represent multiple data variables
+– Each variable is represented by a vertical axis, which are organized as evenly spaced parallel lines
+– Data on each axis is normalized to min/max
+– One data sample is represented by a connected set of points, one on each axis
+By the way we can recognize correlation patterns between adjacent axes
+###end
+
+###id:70
+###q:
+Brushing in parallel coordinates diagram technique
+###a: 
+Marking interesting subsets (for example based on some additional variable)
+###end
+
+###id:71
+###q:
+Line point duality in parallel coordinates diagram
+###a: 
+• Line in parallel coordinates maps to point in scatterplot
+• Line in scatterplot maps to point in parallel coordinates
+###end
+
+###id:72
+###q:
+Two ways of axes ordering in parallel coordinates
+###a: 
+- To enhance clustering (a lot of nearby lines, think about line point duality)
+- To enhance correlation
+###end
+
+###id:73
+###q:
+Function plot for a 1D and 2D scalar field
+###a: 
+1D - Mapping of a discrete set of points to a set of lines by connecting adjacent points f(x)
+2D - Mapping of a discrete set of points to a set of faces by connecting adjacent points f(x,y) - height field
+###end
+
+###id:74
+###q:
+What is a glyph representation
+###a: 
+Small independent visual objects that depict attributes of a data record
+– Discretely placed in a display space
+– Data attributes are represented by different visual channels (e.g., shape, color, size, orientation)
+– Visual channels should be easy to distinguish and combine
+– Mainly used for multivariate data
+###end
+
+###id:75
+###q:
+What are the star glyphs?
+###a: 
+– A star is composed of equally spaced spikes, originating from center
+– Length of the spikes represents value of respective attribute
+– End of rays connected by line
+###end
+
+###id:76
+###q:
+What are the Chernoff faces?
+###a: 
+Data attributes represented by features of a face (eye position, nose length, mouth form, etc.)
+###end
+
+###id:77
+###q:
+Glyph complexity vs. placement density
+###a: 
+Dense placement & simple glyphs
+Sparse placement & complex glyphs
+###end
+
+###id:78
+###q:
+Glyph stick figures
+###a: 
+– 2D figure with limbs
+– Data encoded by
+• length
+• line thickness
+• angle between lines
+###end
+
+###id:79
+###q:
+Glyph Local flow probe
+###a: 
+– Depicts multiple flow characteristics
+– Large & complex glyphs need to be sparsely placed to avoid occlusion
+###end
+
+###id:80
+###q:
+Examples of perceptually uniform channels for quantitative data and non-uniform
+###a: 
+non - Rainbow colormap
+yes - Green-red isoluminant, or white to black
+###end
+
+###id:81
+###q:
+Goals of color mapping
+###a: 
+– Emphasize a specific target in a crowded display
+– Provide warning signals or signify low probability events
+– Group, categorize, and chunk information
+###end
+
+###id:82
+###q:
+Possible problems of color mapping
+###a: 
+Distract the user when inadequately used
+Dependent on viewing and stimulus conditions
+Ineffective for color deficient individuals
+Results in information overload
+###end
+
+###id:83
+###q:
+Color is context dependent. Example
+###a: 
+Take two panes, of significantly different colors and paint a line of one color on them. It may look different.
+###end
+
+###id:84
+###q:
+What is HSB?
+###a: 
+Hue, Saturation, Brightness.
+– Hue: dominant wavelength
+– Saturation: pureness, amount of white light
+– Brightness: intensity of light
+###end
+
+###id:85
+###q:
+What is preattentive processing? Give an example
+###a: 
+– Colors are searched preattentively
+– Preattentive processing: automatic and parallel detection of basic features in visual information (200-250 msec)
+###end
+
+###id:86
+###q:
+Things to know when mapping data to colors
+###a: 
+- Added benefits of parallelism in search begin to reverse with the use of more than six colors, so that search time increases with each color added beyond six
+- Higher contrast sensitivity in luminance than in chrominance
+- We can only distinguish a limited number of colors /brightness levels
+- size of colored line matters
+- luminance matters as well
+– Make sure contrast is high (difference in color of background and letters
+###end
+
+###id:87
+###q:
+Explain the notions of luminance and chrominance
+###a: 
+Luma represents the achromatic image, while the chroma components represent the color information
+###end
+
+###id:88
+###q:
+How color mapping varies?
+###a: 
+– categorical vs. ordered
+– sequential vs. diverging
+– discrete vs. continuou
+###end
+
+###id:89
+###q:
+What is a transfer function?
+###a: 
+T : scalar value -> color value
+• Color values are stored in a color table
+• For a data value, the color at the corresponding entry in the table is used
+###end
+
+###id:90
+###q:
+Pre-shading and post-shading in color mapping
+###a: 
+– Pre-shading
+	• Assign color values to vertices
+	• Interpolate between vertex colors
+– Post-shading
+	• Interpolate between scalar values given at vertices
+	• Assign color values to interpolated scalar values
+###end
+
+###id:91
+###q:
+What is an isoline for f(x,y)?
+###a: 
+An isoline (iso-contour) consists of all points at which the data has a specific value c
+{(x,y) : f(x,y) = c }
+###end
+
+###id:92
+###q:
+Properties of isolines
+###a: 
+– Isolines are always closed curves (except when they exit the domain)
+– Isolines never (self-)intersect, thus are nested
+	• What would happen if a point belonged to 2 different isolines
+– Isolines are always orthogonal to scalar field’s gradient
+###end
+
+###id:93
+###q:
+What is a voxel?
+###a: 
+A volume element. Point sample in 3D. Consists of 8 points
+###end
+
+###id:94
+###q:
+What does a volumetric object consist of?
+###a: 
+– A shape (given by the geometry of the 3D grid)
+– An appearance (given by the data values)
+###end
+
+###id:95
+###q:
+When is it useful to have a volumetric representation?
+###a: 
+– Essential information in the interior
+– Cannot be described by a surface in general (e.g. fire, clouds, gaseous phenomena)
+###end
+
+###id:96
+###q:
+Direct volume rendering. Physical interpretation
+###a: 
+Consider the data as a semi-transparent gel with physical properties and directly get a 3D representation of it.
+considers the physics of light transport in a dense medium
+###end
+
+###id:97
+###q:
+What has to be done before direct volume rendering visualization?
+###a: 
+The data values are mapped to visual properties like color and opacity
+– Data value -> color: f(i) -> C(i)
+– Data value -> opacity: f(i) -> alpha(i)
+Data value can be for example material density
+Mapping is performed via a transfer function
+###end
+
+###id:98
+###q:
+What is opacity?
+###a: 
+0 - absolutely transparent
+1 - absolutely non-transparent (mithril)
+###end
+
+###id:99
+###q:
+What are ray-based models based on?
+###a: 
+– The collection of light along straight rays is based on an emission/absorption model
+– Assumption: Volume consists of small particles
+– Each voxel emits light of the color which is assigned to it, and absorbs light according to it’s opacity
+###end
+
+###id:100
+###q:
+Volume rendering integral
+###a: 
+C(s) = INT{s0, s}(C(s')aINT) ds'
+aINT = e^ (-INT{s', s}alpha(t) dt)
+###end
+
+###id:101
+###q:
+Numerical approximation of the volume rendering integral. Description
+###a: 
+– Volume is resampled at equidistant intervals along the ray (integral as a sum over samples)
+– Sample values are tri-linearly interpolated
+– Apply transfer function
+###end
+
+###id:102
+###q:
+WHat is compositing in DVR?
+###a: 
+Accumulation of color and opacity along rays
+###end
+
+###id:103
+###q:
+Front-back ray-casting (iterative scheme) strategy. With explanation
+###a: 
+We take the opacity accumulated (a_in) and add alpha from what's left (1 - a_in)
+a_out = a_in + (1 - a_in)a
+We take the color so far (C_in) and add the current color C multiplied by the jump in opacity (a_out - a_in)
+C_out = C_in + (a_out - a_in)C
+###end
+
+###id:104
+###q:
+How to remove ringing artifacts in DVR?
+###a: 
+- Solution: Increase sampling rate to Nyquist frequency at least 2 samples per voxel
+- Remove artifacts by stochastic jittering of ray-start position
+###end
+
+###id:105
+###q:
+Enumerate variations of compositing schemes and briefly discuss them:
+###a: 
+– Surface rendering / first hit: stop ray traversal if an iso-surface is hit, and shade the surface points. Produces same result as marching cubes, but with higher accuracy
+– Average: simply accumulate colors but do not account for opacity. Produces an X-ray image
+– Maximum: only takes the maximum color along the ray and displays it. Often used for magnetic resonance angiograms. Good to extract vessel structures
+###end
+
+###id:106
+###q:
+Why do we need to simulate reflection of light and effect on color?
+###a: 
+To emphasize iso-surface shape
+###end
+
+###id:107
+###q:
+The Phong illumination model
+###a: 
+– Considers ambient light and point lights as well as the material color and reflection properties
+– Ambient light: background light, constant everywhere
+– Diffuse reflector reflects equally into all directions
+– Specular reflector reflects mostly into the mirror direction
+###end
+
+###id:108
+###q:
+Ambient light in the Phong model. Formula
+###a: 
+C = k_a C_a O_d
+– Background light, constant everywhere
+- k_a ambient reflection coefficient [0, 1]
+- C_a color of the ambient light
+- O_d object color
+###end
+
+###id:109
+###q:
+Diffuse reflection in the Phong model. Formula
+###a: 
+C = k_d C_p O_d cosT
+- k_d diffuse reflection coefficient of the object [0, 1]
+- C_p color of the point light
+- O_d color of the object
+- T angle between light vector (l) and normal (n)
+###end
+
+###id:110
+###q:
+Specular reflection in the Phong model. Formula
+###a:
+C = k_s C_p O_d (cosP)^n
+- k_s specular reflection coefficient of the object [0, 1]
+- C_p color of the point light
+- O_d color of the object
+- P angle between reflection vector (r) and viewer (v)
+- n shininess factor
+###end
+
+###id:111
+###q:
+Flow visualization - classification
+###a:
+C = k_s C_p O_d (cosP)^n
+- k_s specular reflection coefficient of the object [0, 1]
+- C_p color of the point light
+- O_d color of the object
+- P angle between reflection vector (r) and viewer (v)
+- n shininess factor
+###end
