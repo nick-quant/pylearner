@@ -1,0 +1,606 @@
+string questions:
+
+1. Which iterators are available for string? What is their cool feature?
+
+begin - end
+
+rbegin - rend
+
+cbegin - cend
+
+crbegin - crend
+
+Cool feature - random access
+
+
+
+
+2. What is the return type of string::begin() and string::cbegin()?
+
+string::iterator
+
+string::const_iterator
+
+
+
+
+3. What is the return type of string::rbegin() and string::crbegin()?
+
+string::reverse_iterator
+
+string::const_reverse_iterator
+
+
+
+
+4. How to construct a string from a substring of another string?
+
+string (const string& str, size_t pos, size_t len = npos);
+
+
+
+
+
+
+
+5. How to construct a string Copies the first n characters from the array of characters pointed by s?
+
+And null-terminated array?
+
+string (const char* s, size_t n);
+
+string (const char* s);
+
+
+
+
+6. Fills the string with n consecutive copies of character c.
+
+string (size_t n, char c);
+
+
+
+
+7. What is string::npos and where is it used?
+
+A value of string::npos indicates all characters until the end of str. (if we don't want to calculate explicitly the
+
+number of characters). string (const string& str, size_t pos, size_t len = npos);
+
+
+
+
+8. What is the difference between string::size(), string::length(), string::max_size()?
+
+string::size() = string::length() Returns the length of the string, in terms of bytes.
+
+Returns the length of the string, in terms of bytes. This is the number of actual bytes that conform the contents of the string, which is not necessarily equal to its storage capacity.
+
+Note that string objects handle bytes without knowledge of the encoding that may eventually be used to encode the characters it contains. 
+
+Therefore, the value returned may not correspond to the actual number of encoded characters in sequences of multi-byte or variable-length characters (such as UTF-8).
+
+string = basic_string<char> (so bytes = characters)
+
+This is the maximum potential length the string can reach due to known system or library implementation limitations, 
+
+but the object is not guaranteed to be able to reach that length: it can still fail to allocate storage at any point before that length is reached.
+
+
+
+
+9. What is string::capacity()?
+
+Returns the size of the storage space currently allocated for the string, expressed in terms of bytes.
+
+The capacity of a string can be altered any time the object is modified, even if this modification implies a reduction in size or if the capacity has not been exhausted (this is in contrast with the guarantees given 
+
+to capacity in vector containers).
+
+The capacity of a string can be explicitly altered by calling member reserve.
+
+
+
+
+
+
+
+9. How to request capacity change in string?
+
+void reserve (size_t n = 0);
+
+If n is greater than the current string capacity, the function causes the container to increase its capacity to n characters (or greater).
+
+In all other cases, it is taken as a non-binding request to shrink the string capacity: the container implementation is free to optimize otherwise and leave the string with a capacity greater than n.
+
+This function has no effect on the string length and cannot alter its content.
+
+
+
+
+void shrink_to_fit();
+
+The request is non-binding, and the container implementation is free to optimize otherwise and leave the string with a capacity greater than its size.
+
+This function has no effect on the string length and cannot alter its content.
+
+
+
+
+10. How to erase the contents of the strig? What side effects does it have?
+
+void clear();
+
+No side effects )
+
+
+
+
+11. How to test whether the string is empty?
+
+bool empty() const;
+
+
+
+
+12. What are element access functions for a string?
+
+operator[], at(), back(), front()
+
+
+
+
+13. string::operator[]
+
+char& operator[] (size_t pos);
+
+const char& operator[] (size_t pos) const;
+
+Returns a reference to the character at position pos in the string.
+
+NOTE: size_t is an unsigned integral type !
+
+If pos is equal to the string length, the function returns a reference to the null character that follows the last character in the string (which should not be modified).
+
+
+
+
+14. string::at()
+
+char& at (size_t pos);
+
+const char& at (size_t pos) const;
+
+Returns a reference to the character at position pos in the string.
+
+The function automatically checks whether pos is the valid position of a character in the string (i.e., whether pos is less than the string length), throwing an out_of_range exception if it is not.
+
+
+
+
+15. string::front(), string::back()
+
+char& back();
+
+const char& back() const;
+
+char& front();
+
+const char& front() const;
+
+These functions shall not be called on empty strings.
+
+
+
+
+16. Appending to a string
+
+string::operator += is a subset ob string::append()
+
+string& operator+= ()
+
+string& append()
+
++ NOTE: void push_back (char c)
+
+
+
+
+operator +=
+
+(char c)
+
+
+
+
+Common signatures:
+
+1. (const string& str)
+
+2. (const char* s)
+
+4. (initializer_list<char> il)
+
+
+
+
+
+
+
+append:
+
+1. (const string& str, size_t subpos, size_t sublen = npos)
+
+2. (const char* s, size_t n)
+
+3. (size_t n, char c)
+
+4. template <class InputIterator> string& append (InputIterator first, InputIterator last);
+
+
+
+
+
+
+
+17. How can one assign the contents of the string?
+
+string& string::operator= ()
+
+string& assign()
+
+Parameter lists are like in  appending.
+
+string, substring, c-string, buffer, fill, range, initializer list, move
+
+
+
+
+18. How to insert into a string?
+
+string& insert (size_t pos, const string& str);
+
+Signatures, string, substring, c-string, buffer, fill, single character, range, initializer list
+
+fill allows second signature: iterator insert (const_iterator p, size_t n, char c)
+
+single character and range: iterator insert (const_iterator p, char c);
+
+init list: string& insert (const_iterator p, initializer_list<char> il);
+
+
+
+
+
+
+
+19. How does resize work?
+
+void resize (size_t n);
+
+void resize (size_t n, char c);
+
+Resizes the string to a length of n characters.
+
+
+
+
+If n is smaller than the current string length, the current value is shortened to its first n character, removing the characters beyond the nth.
+
+
+
+
+If n is greater than the current string length, the current content is extended by inserting at the end as many characters as needed to reach a
+
+size of n. If c is specified, the new elements are initialized as copies of c, otherwise, they are value-initialized characters (null characters).
+
+
+
+
+20. How to erase the contents of the string?
+
+string& erase (size_t pos = 0, size_t len = npos);
+
+iterator erase (const_iterator p);
+
+iterator erase (const_iterator first, const_iterator last);
+
+void pop_back(); erase signatures: string, substring,  c-string, buffer, fill, range, init-list
+
+
+
+
+
+
+
+******<algorithm>****************
+
+1. Which operations are presented in <algorithm> header?
+
+Non-modifying sequence operations
+
+Modifying sequence operations
+
+Partitions
+
+Sorting
+
+Binary search (operating on partitioned/sorted ranges)
+
+Merge (operating on sorted ranges)
+
+Heap
+
+Min/max
+
+lexicographical compare
+
+next_permutation
+
+prev_permutation
+
+
+
+
+2. How to check  some condition for all, some, none elements of the range?
+
+template<class InputIterator, class UnaryPredicate>
+
+  bool none_of (InputIterator first, InputIterator last, UnaryPredicate pred)
+
+
+
+
+template<class InputIterator, class UnaryPredicate>
+
+  bool all_of (InputIterator first, InputIterator last, UnaryPredicate pred)
+
+
+
+
+template<class InputIterator, class UnaryPredicate>
+
+  bool any_of (InputIterator first, InputIterator last, UnaryPredicate pred)
+
+
+
+
+3. How to check if all the elements in a range are positive?
+
+all_of(vec.begin(), vec.end(), [](int k) { return k > 0; }) or
+
+none_of(vec.begin(), vec.end(), [](int k) { return k <= 0; })
+
+
+
+
+4. How to apply a function to a range?
+
+template <class InputIterator, class Function>
+
+   Function for_each (InputIterator first, InputIterator last, Function fn);
+
+
+
+
+5. How to increment all elements in a vector?
+
+vector<int> vec{1, 2, 3, 4};
+
+for_each(vec.begin(), vec.end(), [](int& n) { ++n; });
+
+
+
+
+6. How to test two ranges for equality (with an example)?
+
+template <class InputIterator1, class InputIterator2>
+
+  bool equal (InputIterator1 first1, InputIterator1 last1,
+
+              InputIterator2 first2);
+
+
+
+
+template <class InputIterator1, class InputIterator2, class BinaryPredicate>
+
+  bool equal (InputIterator1 first1, InputIterator1 last1,
+
+              InputIterator2 first2, BinaryPredicate pred);
+
+
+
+
+int myints[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
+
+std::vector<int>myvector (myints,myints+5);
+
+equal (myvector.begin(), myvector.end(), myints)
+
+
+
+
+
+
+
+7. Check if two ranges are the permutations. Example + complexity
+
+template <class ForwardIterator1, class ForwardIterator2>
+
+   bool is_permutation (ForwardIterator1 first1, ForwardIterator1 last1,
+
+                        ForwardIterator2 first2);
+
+
+
+
+template <class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
+
+   bool is_permutation (ForwardIterator1 first1, ForwardIterator1 last1,
+
+                        ForwardIterator2 first2, BinaryPredicate pred);
+
+
+
+
+std::array<int,5> foo = {1,2,3,4,5};
+
+std::array<int,5> bar = {3,1,4,5,2};
+
+
+
+
+if ( std::is_permutation (foo.begin(), foo.end(), bar.begin()) ) ...
+
+complexity: up to quadratic
+
+
+
+
+8. Reverse the order of elements in the range.
+
+template <class BidirectionalIterator>
+
+  void reverse (BidirectionalIterator first, BidirectionalIterator last);
+
+Reverses the order of the elements in the range [first,last).
+
+The function calls iter_swap to swap the elements to their new locations
+
+
+
+
+template <class BidirectionalIterator, class OutputIterator>
+
+  OutputIterator reverse_copy (BidirectionalIterator first,
+
+                               BidirectionalIterator last, OutputIterator result);
+
+
+
+
+std::vector<int> myvector;
+
+myvector.resize(9);    // allocate space
+
+std::reverse_copy (myints, myints+9, myvector.begin());
+
+
+
+
+
+
+
+9. How to count the number of elements of a certain value val in a range?
+
+template <class InputIterator, class T>
+
+  typename iterator_traits<InputIterator>::difference_type
+
+    count (InputIterator first, InputIterator last, const T& val);
+
+
+
+
+The return type (iterator_traits<InputIterator>::difference_type) is a signed integral type.
+
+mycount = std::count (myvector.begin(), myvector.end(), 20);
+
+
+
+
+10. How to count the number of elements that satisfy a certain condition?
+
+template <class InputIterator, class UnaryPredicate>
+
+  typename iterator_traits<InputIterator>::difference_type
+
+    count_if (InputIterator first, InputIterator last, UnaryPredicate pred);
+
+Return:
+
+The number of elements in the range [first,last) for which pred does not return false.
+
+The return type (iterator_traits<InputIterator>::difference_type) is a signed integral type.
+
+int mycount = count_if (myvector.begin(), myvector.end(), [](int a) { i%2 == 1;})
+
+
+
+
+11. How to rotate a range (in place and copy)?
+
+template <class ForwardIterator>
+
+  ForwardIterator rotate (ForwardIterator first, ForwardIterator middle,
+
+                          ForwardIterator last);
+
+Rotates the order of the elements in the range [first,last), in such a 
+
+way that the element pointed by middle becomes the new first element.
+
+std::rotate(myvector.begin(),myvector.begin()+3,myvector.end());
+
+template <class ForwardIterator, class OutputIterator>
+
+  OutputIterator rotate_copy (ForwardIterator first, ForwardIterator middle,
+
+                              ForwardIterator last, OutputIterator result);
+
+
+
+
+
+
+
+
+
+
+Streams:
+
+1. What is a stream?
+A stream is an abstraction that represents a device on which input and ouput operations are performed.
+A stream can basically be represented as a source or destination of characters of indefinite length.
+Streams are serial interfaces to storage, buffers files, or any other storage medium
+
+2. What is the difference between output and input streams?
+Output stream is a device to which we send data to display it in some way or do smth else, i.e. writing TO file
+Input stream is a device that sends data to our internal variables, for example reading FROM file
+
+3. What is the philosophy of accessing elements inside a stream?
+No random access, first seek a position and then write or read. Write is outstream, read - instream
+
+4. What are the most important of the basic stream operations?
+	First, the stream is initialized with the appropriate type (like a std::string for a stringstream and the filename for an fstream) of values and suitable modes (like ios::in for input and ios::out for output and many more depending on the type of the stream). 
+	After that, you can specify where the I/O should occur, through the get and put pointers. Depending on how you open the stream, the location may already be set appropriately (for example, if you open a file with ios::app, your get pointer set at the end of the stream, allowing appends). 
+	3.Once you're at the right location in the stream, input and output is done through the << and >> operators. If you want to input an object to the stream, use the << operator; for output, use >>. 
+5. What are the functions in streams for searching and setting positions?
+seekg() - seek where to get (input)
+seekp() - seek where to put (output)
+tellp(), tellg() - returns the current value of the put/get pointer
+Examples:
+seekg(0); seekg(0,ios::beg);
+seekg(5,ios::beg);
+seekp(-10,ios::end);
+seekp(1,ios::cur);
+
+6. What statuses of the streams do we know?
+•good() returns true when everything is okay. 
+•bad() returns true when a fatal error has occurred. 
+•fail() returns true after an unsuccessful stream operation like an unexpected type of input being encountered. 
+•eof() returns true when the end of file is reached. 
+
+7. What are the return values of >> and <<
+bool operator >>
+ostream& operator<<
+
+8. How to get an underlying buffer of a stream? Why could it be useful?
+.rdbuf()
+It can be useful for example for copying smth from one stream to another
+ofs << ifs.rdbug();
+
+
+
+Regular expressions:
