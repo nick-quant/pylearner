@@ -1,4 +1,4 @@
-###id:1
+﻿###id:1
 ###q:
 When developing a dynamic-programming algorithm, we follow a sequence of what steps?
 ###a: 
@@ -73,3 +73,35 @@ extr is max if we are optimizing price, and min if we are minimizing costs. Insi
 
 4. What additional infor
 ###end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Linked list problems:
+1. always check if input node is 0
+2. sometimes one needs two pointers which are updated simultaneously. left, right may be. 
+3. if we want to delete something and we have the head we need to have pointers to del and pre_del
+4. useful to revert n elems or until some node
+5. In revert function (in while) 4 statements. If left, right model
+6. merge two linked lists (hint - make a dummy first element then adding others will be uniform)

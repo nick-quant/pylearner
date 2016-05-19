@@ -204,47 +204,459 @@ How to erase the contents of the string?
 string& erase (size_t pos = 0, size_t len = npos);
 iterator erase (const_iterator p);
 iterator erase (const_iterator first, const_iterator last);
-void pop_back(); erase signatures: string, substring,  c-string, buffer, fill, range, init-list
+void pop_back(); 
 ###end
 
 ###id:21
 ###q:
-
+What are the known signatures of arguments used in strings? In what functions are they used
 ###a: 
+string (1)	(const string& str);
+substring (2)	(const string& str, size_t subpos, size_t sublen);
+c-string (3)	(const char* s);
+buffer (4)	(const char* s, size_t n);
+fill (5)	(size_t n, char c);
+single character (6)	(char c);
+range (7)	(InputIterator first, InputIterator last);
+initializer list (8)	(initializer_list<char> il);
+
+Used in: constructor and in modifiers - append (without single character), insert, assign, erase, replace(withour single char)
+###end
+
+###id:22
+###q:
+How to insert additional characters into the string right before the character indicated by pos
+###a: 
+All 8 signatures, e.g. string& insert (size_t pos, const string& str);
+The most tedious additional signatures:
+iterator insert (const_iterator p, size_t n, char c);
+iterator insert (const_iterator p, char c)
+template <class InputIterator> iterator insert (iterator p, InputIterator first, InputIterator last);
+###end
+
+###id:23
+###q:
+How to replace the portion of the string that begins at character pos and spans len characters (or the part of the string in the range between [i1,i2)) by new contents?
+###a: 
+All signatures except single character.
+Pairs of functions with size_t and const_iterator, e.g.:
+string& replace (size_t pos,        size_t len,        const string& str);
+string& replace (const_iterator i1, const_iterator i2, const string& str);
+no such opportunity in substring
+string& replace (const_iterator i1, const_iterator i2, InputIterator first, InputIterator last);
+init list only so: string& replace (const_iterator i1, const_iterator i2, initializer_list<char> il);
+###end
+
+###id:24
+###q:
+How to exchange contents of the strings? What is the complexity
+###a: 
+std::swap(string&, string&)
+string::swap(string&)
+Lengths may differ. Note
+Constant complexity
+###end
+
+###id:25
+###q:
+How to return an underlying c string?
+###a: 
+const char* c_str() const noexcept;
+Returns a pointer to an array that contains a null-terminated sequence of characters (i.e., a C-string) representing the current value of the string object.
+This array includes the same sequence of characters that make up the value of the string object plus an additional terminating null-character ('\0') at the end.
+or const char* data() const noexcept; They are synonyms
+###end
+
+###id:26
+###q:
+How to copy sequence of characters from string?
+###a: 
+size_t copy (char* s, size_t len, size_t pos = 0) const;
+Copies a substring of the current value of the string object into the array pointed by s. This substring contains the len characters that start at position pos.
+The function does not append a null character at the end of the copied content.
+The number of characters copied to the array pointed by s. This may be equal to len or to length()-pos (if the string value is shorter than pos+len).
+###end
+
+###id:27
+###q:
+Which are the member methods of string to find content in it?
+###a: 
+find - Find content in string
+rfind - Find last occurrence of content in string
+find_first_of - Find character in string
+find_last_of - Find character in string from the end
+find_first_not_of - Find absence of character in string
+find_last_not_of - Find non-matching character in string from the end
+###end
+
+###id:28
+###q:
+What are the standard signatures for finding in the string?
+###a: 
+string (1)	size_t ___ (const string& str, size_t pos = 0) const noexcept;
+c-string (2)	size_t ___ (const char* s, size_t pos = 0) const; // or pos = npos for rfinds and so on
+buffer (3)	size_t ___ (const char* s, size_t pos, size_type n) const;
+character (4)	size_t ___ (char c, size_t pos = 0) const noexcept;
+###end
+
+###id:29
+###q:
+How to generate a substring from a string?
+###a: 
+string substr (size_t pos = 0, size_t len = npos) const;
+Returns a newly constructed string object with its value initialized to a copy of a substring of this object.
+
+The substring is the portion of the object that starts at character position pos and spans len characters (or until the end of the string, whichever comes first).
+###end
+
+###id:30
+###q:
+How to compare strings?
+###a: 
+tring (1)	
+int compare (const string& str) const noexcept;
+
+substrings (2)	
+int compare (size_t pos, size_t len, const string& str) const;
+int compare (size_t pos, size_t len, const string& str,
+             size_t subpos, size_t sublen) const;
+
+c-string (3)	
+int compare (const char* s) const;
+int compare (size_t pos, size_t len, const char* s) const;
+
+buffer (4)	
+int compare (size_t pos, size_t len, const char* s, size_t n) const;
+
+Returns a signed integral indicating the relation between the strings:
+0	They compare equal
+<0	Either the value of the first character that does not match is lower in the compared string, or all compared characters match but the compared string is shorter.
+>0	Either the value of the first character that does not match is greater in the compared string, or all compared characters match but the compared string is longer.
+###end
+
+###id:31
+###q:
+What are the functions for converting a string to integral numbers?
+###a: 
+stoi - string to int
+stol - string to long int
+stoul - to unsuigned integer
+stoll - to long long
+stoull - unsigned long long
+###end
+
+###id:32
+###q:
+What is the signature for converting to integral numbers and description
+###a: 
+e.g.
+int stoi (const string&  str, size_t* idx = 0, int base = 10);
+int stoi (const wstring& str, size_t* idx = 0, int base = 10);
+Parses str interpreting its content as an integral number of the specified base, which is returned as an int value.
+If idx is not a null pointer, the function also sets the value of idx to the position of the first character in str after the number.
+###end
+
+###id:33
+###q:
+What are the functions for converting a string to floating point numbers?
+###a: 
+stof - to float
+stod - to double
+stold - to long double
+###end
+
+###id:34
+###q:
+What is the signature for converting to floating point numbers and description
+###a: 
+e.g.
+long double stold (const string&  str, size_t* idx = 0);
+long double stold (const wstring& str, size_t* idx = 0);
+Parses str interpreting its content as a floating-point number, which is returned as a value of type long double.
+If idx is not a null pointer, the function also sets the value of idx to the position of the first character in str after the number.
+###end
+
+###id:35
+###q:
+How to convert a nmber to a string without streams?
+###a: 
+string to_string (int val);
+string to_string (long val);
+string to_string (long long val);
+string to_string (unsigned val);
+string to_string (unsigned long val);
+string to_string (unsigned long long val);
+string to_string (float val);
+string to_string (double val);
+string to_string (long double val);
+###end
+
+###id:36
+###q:
+How to check  some condition for all, some, none elements of the range?
+###a: 
+template<class InputIterator, class UnaryPredicate>
+  bool none_of (InputIterator first, InputIterator last, UnaryPredicate pred)
+
+template<class InputIterator, class UnaryPredicate>
+  bool all_of (InputIterator first, InputIterator last, UnaryPredicate pred)
+
+template<class InputIterator, class UnaryPredicate>
+  bool any_of (InputIterator first, InputIterator last, UnaryPredicate pred)
+###end
+
+###id:37
+###q:
+How to check if all the elements in a range are positive?
+###a: 
+all_of(vec.begin(), vec.end(), [](int k) { return k > 0; }) or
+none_of(vec.begin(), vec.end(), [](int k) { return k <= 0; })
+###end
+
+###id:38
+###q:
+How to apply a function to a range?
+###a: 
+template <class InputIterator, class Function>
+   Function for_each (InputIterator first, InputIterator last, Function fn);
+###end
+
+###id:39
+###q:
+How to increment all elements in a vector?
+###a: 
+vector<int> vec{1, 2, 3, 4};
+for_each(vec.begin(), vec.end(), [](int& n) { ++n; });
+###end
+
+###id:40
+###q:
+How to test two ranges for equality (with an example)?
+###a: 
+template <class InputIterator1, class InputIterator2>
+  bool equal (InputIterator1 first1, InputIterator1 last1,
+              InputIterator2 first2);
+template <class InputIterator1, class InputIterator2, class BinaryPredicate>
+  bool equal (InputIterator1 first1, InputIterator1 last1,
+              InputIterator2 first2, BinaryPredicate pred);
+
+int myints[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
+std::vector<int>myvector (myints,myints+5);
+equal (myvector.begin(), myvector.end(), myints)
+###end
+
+###id:41
+###q:
+Check if two ranges are the permutations. Example + complexity
+###a: 
+template <class ForwardIterator1, class ForwardIterator2>
+   bool is_permutation (ForwardIterator1 first1, ForwardIterator1 last1,
+                        ForwardIterator2 first2);
+
+template <class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
+   bool is_permutation (ForwardIterator1 first1, ForwardIterator1 last1,
+                        ForwardIterator2 first2, BinaryPredicate pred);
+
+std::array<int,5> foo = {1,2,3,4,5};
+std::array<int,5> bar = {3,1,4,5,2};
+if ( std::is_permutation (foo.begin(), foo.end(), bar.begin()) ) ...
+
+complexity: up to quadratic
+###end
+
+###id:42
+###q:
+Reverse the order of elements in the range.
+###a: 
+template <class BidirectionalIterator>
+  void reverse (BidirectionalIterator first, BidirectionalIterator last);
+
+Reverses the order of the elements in the range [first,last).
+The function calls iter_swap to swap the elements to their new locations
+
+template <class BidirectionalIterator, class OutputIterator>
+  OutputIterator reverse_copy (BidirectionalIterator first,
+                               BidirectionalIterator last, OutputIterator result);
+
+std::vector<int> myvector;
+myvector.resize(9);    // allocate space
+std::reverse_copy (myints, myints+9, myvector.begin());
+###end
+
+###id:43
+###q:
+How to count the number of elements of a certain value val in a range?
+###a: 
+template <class InputIterator, class T>
+  typename iterator_traits<InputIterator>::difference_type
+    count (InputIterator first, InputIterator last, const T& val);
+
+The return type (iterator_traits<InputIterator>::difference_type) is a signed integral type.
+mycount = std::count (myvector.begin(), myvector.end(), 20);
+###end
+
+###id:44
+###q:
+How to count the number of elements that satisfy a certain condition?
+###a: 
+template <class InputIterator, class UnaryPredicate>
+  typename iterator_traits<InputIterator>::difference_type
+    count_if (InputIterator first, InputIterator last, UnaryPredicate pred);
+
+Return:
+The number of elements in the range [first,last) for which pred does not return false.
+The return type (iterator_traits<InputIterator>::difference_type) is a signed integral type.
+int mycount = count_if (myvector.begin(), myvector.end(), [](int a) { i%2 == 1;})
+###end
+
+
+###id:45
+###q:
+How to rotate a range (in place and copy)?
+###a: 
+template <class ForwardIterator>
+  ForwardIterator rotate (ForwardIterator first, ForwardIterator middle,
+                          ForwardIterator last);
+
+Rotates the order of the elements in the range [first,last), in such a 
+way that the element pointed by middle becomes the new first element.
+std::rotate(myvector.begin(),myvector.begin()+3,myvector.end());
+
+template <class ForwardIterator, class OutputIterator>
+  OutputIterator rotate_copy (ForwardIterator first, ForwardIterator middle,
+                              ForwardIterator last, OutputIterator result);
 
 ###end
 
-###id:2
+###id:46
 ###q:
-
+Regex. Match a single lowercase letter, one of 3 letters (a b and c), all lowercase letters or a number, uppercases or all numbers
 ###a: 
-
+[a-z]
+[abc]
+[a-z3]
+[A-Z0-9]
 ###end
 
-###id:2
+###id:47
 ###q:
-
+How to match a bracket and all numbers (one character)
 ###a: 
-
+[\[0-9]
 ###end
 
-###id:2
+
+###id:48
 ###q:
-
+How to match one ore more lower case letters?
 ###a: 
-
+[a-z]+
 ###end
 
-###id:2
+###id:49
 ###q:
-
+How to match zero or more combinations of Upper and lower case letters? AvGhYt (upper comes first)
 ###a: 
-
+([A-Z][a-z])*
 ###end
 
-###id:2
+###id:50
 ###q:
-
+What is the difference between "." and "\."
 ###a: 
+"." matches any character
+"\." matches a dot
+###end
 
+
+###id:51
+###q:
+Enumerate special characters in regex language.
+###a: 
+Special characters need to be "escaped" in regex language
+[  ]  (  )  \  .  *  +   ^   ?   |   {   }   $
+###end
+
+###id:52
+###q:
+Is a "-" a special character? 
+###a: 
+The hyphen or minus sign (-) is a special case. It helps to specify a range, but only if it appears within brackets ([ ]), 
+and between two other characters within the range. Otherwise, the minus sign is a literal character and doesn't need to be escaped.
+###end
+
+###id:53
+###q:
+Write a c++ variant of the following:
+"Match a letter or an underscore. Then match zero or more characters, in which each may be a digit, a letter, or an underscore. Then match a literal dot (.). Finally, match one or more characters, in which each may be a digit or a letter."
+###a: 
+char regex_str[] = "[a-zA-Z_][a-zA-Z_0-9]*\\.[a-zA-Z0-9]+";
+###end
+
+
+###id:54
+###q:
+Write a regex for "One to four digit number" (not starting with 0)
+###a: 
+[0-9][1-9]{0, 3}
+###end
+
+###id:55
+###q:
+Why is a regular expression object very merkwuerdig in c++?
+###a: 
+It's compiled at runtime
+###end
+
+###id:56
+###q:
+How to create a regex with some expression in c++?
+###a: 
+string regex_str = "[a-zA-Z_][a-zA-Z_0-9]*\\.[a-zA-Z0-9]+";
+regex reg1(regex_str);
+###end
+
+
+###id:57
+###q:
+How to make a regex be ignorant to case sensitiveness without changing the regex itself?
+###a: 
+regex reg1(regex_str, regex_constants::icase);
+###end
+
+###id:58
+###q:
+What function returns true if the target string contains one or more instances of the pattern specified in the regular expression object?
+###a: 
+regex_search("Print readme.txt", reg1) // returns bool
+###end
+
+###id:59
+###q:
+What is the difference between regex_iterator and sregex_iterator?
+###a: 
+regex_iterator iterates through a C-string (type const char *).
+sregex_iterator iterates through an object of the STL string class. (Notice that this function name begins with an s, unlike the other function name!)
+###end
+
+###id:60
+###q:
+How could one prepare an sregex_iterator object for use?
+###a: 
+string str = "File names are readme.txt and my.cmd.";
+sregex_iterator it(str.begin(), str.end(), reg1);
+sregex_iterator it_end;
+As soon as it's created, the iterator (it) points to the first substring found (if any), applying the regex pattern in reg1.
+###end
+
+###id:61
+###q:
+What about ending conditions in sregex_iterator and regex_iterator?
+###a: 
+What's unique about sregex_iterator and regex_iterator is that declaring such an iterator without initializing it automatically creates an ending condition. We'll test the iterator against this:
+sregex_iterator it_end;
+while(it != it_end) {
+     cout << *it << endl;
+     ++it;
+}
 ###end

@@ -46,7 +46,7 @@ min_height = correct_answers * max(scores)
 #stat_file = 'qstat.txt'
 #question_file = 'patterns_base.txt'
 #question_file = 'can_base.txt'
-question_file = 'scvis_base.txt'
+question_file = 'cpp_base.txt'
 print("Command line arguments: ")
 arg_dct = sys_args_to_dct()
 print(arg_dct)
